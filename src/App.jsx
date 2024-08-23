@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+import css from "./App.module.css";
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
+const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage/MovieDetailsPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const Navigation = lazy(() => import("./components/Navigation/Navigation"));
+const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
+const MovieReview = lazy(() => import("./components/MovieReviews/MovieReviews"));
+
+export const App = () => (
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className={css.app}>
+        <nav className={css.nav}>
+          <Navigation />
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId/*" element={<MovieDetailsPage/>}>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="review" element={<MovieReview />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </Suspense>
+  </Router>
+);
 
-export default App
+export default App;
