@@ -1,0 +1,33 @@
+.info {
+	display: flex;
+	gap: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid grey;
+}
+
+.image {
+	max-width: 30%;
+	object-fit: cover;
+}
+
+.subNav {
+	padding-bottom: 20px;
+	border-bottom: 1px solid grey;
+}
+
+.subLink {
+	display: block;
+}
+
+.back {
+	margin-bottom: 20px;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid darkorange;
+	background-color: orange;
+}
+
+.back:hover {
+	border-color: orange;
+	background-color: darkorange;
+}
