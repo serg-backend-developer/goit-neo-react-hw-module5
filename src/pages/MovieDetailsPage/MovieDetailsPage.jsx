@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState, useRef } from "react";
 import { NavLink, Routes, Route, useParams, useLocation, useNavigate } from "react-router-dom";
 
-import { getMovieDetailsById } from "../../api.js";
+import { getMovieDetails } from "../../api.js";
 import css from "./MovieDetailsPage.module.css";
 
 const MovieCast = lazy(() => import("../../components/MovieCast/MovieCast"));
@@ -21,7 +21,7 @@ const MovieDetailsPage = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const data = await getMovieDetailsById(movieId);
+        const data = await getMovieDetails(movieId);
         setMovieDetails(data);
       } catch (error) {
         console.error("Error fetching movie details:", error);

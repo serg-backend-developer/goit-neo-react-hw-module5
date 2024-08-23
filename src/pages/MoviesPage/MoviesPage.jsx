@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 
 import css from "./MoviesPage.module.css";
 import MovieList from "../../components/MovieList/MovieList";
-import { fetchMovieByName } from "../../api";
+import { fetchMovieBySearch } from "../../api";
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,7 +16,7 @@ const MoviesPage = () => {
     if (queryParam) {
       const fetchMovies = async () => {
         try {
-          const moviesData = await fetchMovieByName(queryParam);
+          const moviesData = await fetchMovieBySearch(queryParam);
           setMovies(moviesData.results);
         } catch (err) {
           setError("Something went wrong while fetching movies", err);

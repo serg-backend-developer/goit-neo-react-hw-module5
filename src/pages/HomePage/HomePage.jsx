@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getToday } from "../../api.js";
+import { getTodayMovies } from "../../api.js";
 import MovieList from "../../components/MovieList/MovieList";
 
 export const HomePage = () => {
@@ -9,7 +9,7 @@ export const HomePage = () => {
   useEffect(() => {
     const fetchMoviesList = async () => {
       try {
-        const moviesData = await getToday();
+        const moviesData = await getTodayMovies();
         setMoviesList(moviesData.results);
       } catch (error) {
         console.error("Error fetching movies:", error);
